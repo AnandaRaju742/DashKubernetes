@@ -5,6 +5,7 @@ gcloud config list project
 gcloud config list project
 gcloud config set compute/zone us-central1-a
 cd app
+echo $PWD
 ls
 tar -xvf test.tar
 rm test.tar
@@ -17,7 +18,6 @@ curl -I  http://localhost:4000
 STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:4000)
   if [ $STATUS -eq 200 ]; then
     echo "Got 200! All done!"
-    break
   else
     echo "Got $STATUS :( Not done yet..."
 	exit 1
