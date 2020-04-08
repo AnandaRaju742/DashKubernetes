@@ -1,4 +1,4 @@
-read -p 'ProjectID please: ' projectID
+read -p 'projectID please: ' projectID
 gcloud config set project $projectID
 gcloud auth list
 gcloud config list project
@@ -23,9 +23,9 @@ STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:4000)
 	exit 1
   fi
 #status 200 so alive
-docker tag node-app:0.1 gcr.io/projectID/node-app:0.1
+docker tag node-app:0.1 gcr.io/$projectID/node-app:0.1
 docker images
-docker push gcr.io/projectID/node-app:0.1
+docker push gcr.io/$projectID/node-app:0.1
 
 gcloud container clusters create chatbot
 gcloud config list project
@@ -34,15 +34,15 @@ docker stop $(docker ps -q)
 docker rm $(docker ps -aq)
 #removed and stopped all
 #pushing the image to container registry
-docker rmi node-app:0.2 gcr.io/projectID/node-app node-app:0.1
+docker rmi node-app:0.2 gcr.io/$projectID/node-app node-app:0.1
 docker rmi node:6
 docker rmi $(docker images -aq) # remove remaining images
 docker images
 
-docker pull gcr.io/projectID/node-app:0.1
+docker pull gcr.io/$projectID/node-app:0.1
 docker images
 gcloud config list project
-docker run -d -p 8000:80 -d gcr.io/projectID/node-app:0.1 
+docker run -d -p 8000:80 -d gcr.io/$projectID/node-app:0.1 
 echo 'Again sleeping for 5 seconds'
 sleep 5
 STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000)
@@ -53,6 +53,6 @@ STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000)
     echo "Got $STATUS :( Not done yet..."
 	exit 1
   fi
-kubectl create deployment hello-server --image=gcr.io/projectID/node-app:0.1
+kubectl create deployment hello-server --image=gcr.io/$projectID/node-app:0.1
 kubectl expose deployment hello-server --type=LoadBalancer --port 8000  --target-port 80
 kubectl get services
