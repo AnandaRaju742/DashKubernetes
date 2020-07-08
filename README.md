@@ -7,7 +7,7 @@
 
 ## Description
 It's a hassle to deploy websites using Google Kubernetes Engine(GKE) in Google Cloud Platform(GCP). There are a lot of steps involved in the process which takes a lot of time to configure. The script provided here aims to solve this problem. 
-It was used to deploy our project Mr.Dash (a chatbot for Daksh Fest at SASTRA Deemed to be University) in GCP.
+It was used to deploy our project **Mr.Dash** (a chatbot for Daksh Fest at SASTRA Deemed to be University) in GCP.
 This can also be used for deploying any static website using GKE.
 
 ## Execution Pipeline
