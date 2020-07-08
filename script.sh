@@ -7,8 +7,6 @@ gcloud config set compute/zone us-central1-a
 cd app
 echo $PWD
 ls
-tar -xvf test.tar
-rm test.tar
 docker build -t node-app:0.1 .
 docker images
 docker run -d -p 4000:80 --name my-app node-app:0.1
